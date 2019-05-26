@@ -1,3 +1,7 @@
+pub use self::domain::*;
+
+mod domain;
+
 #[cfg(test)]
 mod tests {
     #[test]
