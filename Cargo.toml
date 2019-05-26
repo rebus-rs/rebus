@@ -1,0 +1,9 @@
+[package]
+name = "rebus"
+version = "0.1.0"
+authors = [
+    "Alexander Meshcheryakov <freecoder.xx@gmail.com>"
+]
+edition = "2018"
+
+[dependencies]
