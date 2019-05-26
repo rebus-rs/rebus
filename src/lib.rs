@@ -1,5 +1,6 @@
 pub use self::domain::*;
 
+pub mod dao;
 mod domain;
 
 #[cfg(test)]
