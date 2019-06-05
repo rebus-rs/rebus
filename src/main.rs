@@ -1,5 +1,12 @@
 use std::env;
 use structopt::{StructOpt, clap::{App, AppSettings, Arg, SubCommand}};
+use lazy_static::lazy_static;
+use rebus::Settings;
+
+lazy_static! {
+    pub static ref SETTINGS: Settings = Settings::new()
+        .expect("Read settings error");
+}
 
 #[derive(Debug, StructOpt, PartialEq)]
 #[structopt(about = "The Red Event Bus utility.", author = "")]
@@ -28,7 +35,9 @@ fn rebus_app<'a, 'b>(external_subcommands: &[&'a str]) -> App<'a, 'b> {
 }
 
 fn main() {
-    let external_subcommands = vec![];
+    let external_subcommands = SETTINGS.extensions.iter()
+        .map(|s| s.as_str())
+        .collect::<Vec<_>>();
     let matches = rebus_app(&external_subcommands)
         .get_matches();
 
