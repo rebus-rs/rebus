@@ -4,14 +4,19 @@ use config::{Config, ConfigError, File};
 use dirs;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Settings {
+    pub debug: bool,
+
+    #[serde(default)]
     pub extensions: Vec<String>,
 }
 
 impl Default for Settings {
     fn default() -> Self {
         Settings {
-            extensions: Default::default(),
+            debug: false,
+            extensions: vec![],
         }
     }
 }
@@ -39,7 +44,7 @@ impl Settings {
 
         let mut config = Config::new();
         config.merge(Config::try_from(&Settings::default())?)?;
-        config.merge(File::from(settings_path).required(false))?;
+//        config.merge(File::from(settings_path).required(false))?;
 
         config.try_into()
     }
